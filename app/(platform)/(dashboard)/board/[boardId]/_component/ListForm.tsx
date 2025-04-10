@@ -19,7 +19,7 @@ const ListForm = ({ id }: ListFormProps) => {
     const [loading, setloading] = useState(false)
     const router = useRouter()
 
-    const onClick = async (e) => {
+    const onClick = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setloading(true)
         try {
@@ -34,7 +34,7 @@ const ListForm = ({ id }: ListFormProps) => {
             console.log(error)
         } finally {
             setloading(false);
-            e.target.reset();
+            (e.target as HTMLFormElement).reset();
             disableEditing()
         }
 
