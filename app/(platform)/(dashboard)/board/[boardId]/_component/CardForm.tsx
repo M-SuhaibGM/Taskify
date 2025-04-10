@@ -19,11 +19,12 @@ const CardForm = ({ id }: ListFormProps) => {
     const [loading, setloading] = useState(false)
     const router = useRouter()
 
-    const onClick = async (e) => {
+    const onClick = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setloading(true)
         try {
-            const title = e.target[0].value
+            const form = e.target as HTMLFormElement;
+            const title = (form.elements[0] as HTMLInputElement).value;
             const responce = await axios.post(`/api/list/${id}/card`, { title });;
             if (responce.status == 200) {
                 router.refresh()
@@ -34,7 +35,7 @@ const CardForm = ({ id }: ListFormProps) => {
             console.log(error)
         } finally {
             setloading(false);
-            e.target.reset();
+            (e.target as HTMLFormElement).reset();
             disableEditing()
         }
 
