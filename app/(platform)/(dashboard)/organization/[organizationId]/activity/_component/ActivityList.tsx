@@ -1,9 +1,9 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { AuditLog } from "@prisma/client"
 interface Props {
-    data: AuditLog[];
+    data: AuditLog;
 }
-const ActivityList = ({ data }:) => {
+const ActivityList = ({ data }:Props) => {
     return (
         <li className="flex items-center gap-2 mt-5">
             <Avatar className="h-8 w-8">
