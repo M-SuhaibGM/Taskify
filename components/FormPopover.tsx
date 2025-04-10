@@ -28,11 +28,12 @@ const FormPopover = ({
     const closeref = useRef<ElementRef<"button">>(null);
     const router = useRouter()
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
 
-        const title = e.target[0].value;
+        const form = e.target as HTMLFormElement;
+        const title = (form.elements.namedItem("title") as HTMLInputElement).value;
 
         if (!selectedImage) {
             toast.error("Please select an image");
@@ -66,7 +67,7 @@ const FormPopover = ({
             console.error(e);
         } finally {
             setLoading(false);
-            e.target.reset();
+            (e.target as HTMLFormElement).reset();
         }
     };
 
